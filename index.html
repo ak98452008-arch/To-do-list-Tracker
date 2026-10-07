@@ -143,14 +143,14 @@
     }
   }
 
-  // Force hide after 1.5 seconds maximum
-  setTimeout(hideSplash, 1500);
+  // Force hide after 50.0 seconds maximum
+  setTimeout(hideSplash, 50000);
 
   // Hide immediately if already loaded
   if (document.readyState === 'complete') {
-    setTimeout(hideSplash, 1000);
+    setTimeout(hideSplash, 50000);
   } else {
-    window.addEventListener('load', () => setTimeout(hideSplash, 1000));
+    window.addEventListener('load', () => setTimeout(hideSplash, 50000));
   }
 </script>
 
