@@ -44,20 +44,6 @@
 </style>
 
 
-  /* Splash Screen Permanent White Theme Override */
-  #splash-screen, 
-  #splash-screen * {
-    color: #ffffff !important;
-  }
-  
-  #splash-screen h2, 
-  #splash-screen p, 
-  #splash-screen span, 
-  #splash-screen div {
-    color: #ffffff !important;
-    opacity: 1 !important;
-  }
-</style>
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -284,13 +270,7 @@ const timer = setTimeout(hideSplash, 5000);
                     <i class="fa-solid fa-calendar-check text-teal-500"></i> )
                     <span id="neetCountdown">Targeting NEET 2026</span>
                 </div>
-                <!-- Main Header Theme Selector -->
-<select id="themeSelect" onchange="changeTheme(this.value)" style="padding: 6px 10px; border-radius: 8px; background: #1e293b; color: #fff; border: 1px solid #334155;">
-  <option value="dark">🌙 Dark</option>
-</select>
-
-
-
+                
                 <!-- Theme Toggle Button -->
                 <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
                     <i id="themeIcon" class="fa-solid fa-moon"></i>
