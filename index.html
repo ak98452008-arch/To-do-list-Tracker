@@ -21,90 +21,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
   /* Complete Theme Engine Overrides */
-  /* 1. DARK THEME */
-  body.theme-dark { background-color: #0f172a !important; color: #f8fafc !important; }
-  body.theme-dark header, body.theme-dark div[class*="bg-"], body.theme-dark select, body.theme-dark input {
-    background-color: #1e293b !important; color: #f8fafc !important; border-color: #334155 !important;
-  }
-
-  /* 2. LIGHT THEME (Perfect High-Contrast & Clear Visibility) */
-  body.theme-light { 
-    background-color: #f1f5f9 !important; 
-    color: #0f172a !important; 
-  }
   
-  /* Cards, Containers, Inputs & Selects */
-  body.theme-light header, 
-  body.theme-light div[class*="bg-"], 
-  body.theme-light select, 
-  body.theme-light input,
-  body.theme-light textarea {
-    background-color: #ffffff !important; 
-    color: #0f172a !important; 
-    border-color: #cbd5e1 !important;
+  /* Standard Clean CSS Reset */
+  body {
+    background-color: #0f172a;
+    color: #f8fafc;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
-  /* All Typography / Text Elements */
-  body.theme-light h1, body.theme-light h2, body.theme-light h3, 
-  body.theme-light h4, body.theme-light h5, body.theme-light h6, 
-  body.theme-light p, body.theme-light span, body.theme-light label, 
-  body.theme-light div, body.theme-light li, body.theme-light a {
-    color: #0f172a !important;
-    text-shadow: none !important;
-  }
-
-  /* Muted / Secondary Text */
-  body.theme-light .text-slate-400, 
-  body.theme-light .text-gray-400, 
-  body.theme-light .text-slate-500 {
-    color: #475569 !important;
-  }
-
-  /* Buttons Visibility */
-  body.theme-light button, 
-  body.theme-light .btn {
-    background-color: #0284c7 !important; 
-    color: #ffffff !important; 
-    border: none !important;
-    font-weight: 600 !important;
-  }
-
-  body.theme-light button * {
+  /* Splash Screen Permanent White */
+  #splash-screen, 
+  #splash-screen * {
     color: #ffffff !important;
   }
-
-
-
-  /* 3. NEON THEME */
-  body.theme-neon { background-color: #0a051b !important; color: #00f6ff !important; }
-  body.theme-neon header, body.theme-neon div[class*="bg-"], body.theme-neon select, body.theme-neon input {
-    background-color: #12092e !important; color: #00f6ff !important; border-color: #ff007f !important;
-    box-shadow: 0 0 10px rgba(0, 246, 255, 0.15) !important;
+  #splash-screen h2, 
+  #splash-screen p, 
+  #splash-screen span, 
+  #splash-screen div {
+    color: #ffffff !important;
+    opacity: 1 !important;
   }
-  body.theme-neon h1, body.theme-neon h2, body.theme-neon h3, body.theme-neon p, body.theme-neon span {
-    color: #00f6ff !important; text-shadow: 0 0 4px rgba(0,246,255,0.4);
-  }
-
-  /* 4. EMERALD THEME */
-  body.theme-emerald { background-color: #022c22 !important; color: #ecfdf5 !important; }
-  body.theme-emerald header, body.theme-emerald div[class*="bg-"], body.theme-emerald select, body.theme-emerald input {
-    background-color: #064e3b !important; color: #ecfdf5 !important; border-color: #047857 !important;
-  }
-  body.theme-emerald h1, body.theme-emerald h2, body.theme-emerald h3, body.theme-emerald p, body.theme-emerald span {
-    color: #a7f3d0 !important;
-  }
-  /* 5. CYBERPUNK THEME (Neon Yellow & Pink) */
-  body.theme-cyberpunk { background-color: #120024 !important; color: #fcee0a !important; }
-  body.theme-cyberpunk header, body.theme-cyberpunk div[class*="bg-"], body.theme-cyberpunk select, body.theme-cyberpunk input {
-    background-color: #1a0033 !important; color: #00ff9f !important; border-color: #ff0055 !important;
-    box-shadow: 0 0 8px rgba(255, 0, 85, 0.3) !important;
-  }
-  body.theme-cyberpunk h1, body.theme-cyberpunk h2, body.theme-cyberpunk h3, body.theme-cyberpunk p, body.theme-cyberpunk span {
-    color: #fcee0a !important; text-shadow: 0 0 3px rgba(252, 238, 10, 0.5);
-  }
-  body.theme-cyberpunk button {
-    background-color: #ff0055 !important; color: #ffffff !important; font-weight: bold !important;
-  }
+</style>
 
 
   /* Splash Screen Permanent White Theme Override */
@@ -350,11 +287,8 @@ const timer = setTimeout(hideSplash, 5000);
                 <!-- Main Header Theme Selector -->
 <select id="themeSelect" onchange="changeTheme(this.value)" style="padding: 6px 10px; border-radius: 8px; background: #1e293b; color: #fff; border: 1px solid #334155;">
   <option value="dark">🌙 Dark</option>
-  <option value="light">☀️ Light</option>
-  <option value="neon">⚡ Neon</option>
-  <option value="emerald">🌿 Emerald</option>
-  <option value="cyberpunk">🤖 Cyberpunk</option>
 </select>
+
 
 
                 <!-- Theme Toggle Button -->
