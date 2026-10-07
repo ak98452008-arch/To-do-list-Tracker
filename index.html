@@ -409,13 +409,13 @@
   }
 
   // Force hide after 1.5 seconds maximum
-  setTimeout(hideSplash, 1500);
+  setTimeout(hideSplash, 5000);
 
   // Hide immediately if already loaded
   if (document.readyState === 'complete') {
-    setTimeout(hideSplash, 1000);
+    setTimeout(hideSplash, 5000);
   } else {
-    window.addEventListener('load', () => setTimeout(hideSplash, 1000));
+    window.addEventListener('load', () => setTimeout(hideSplash, 5000));
   }
 </script>
 
@@ -1138,35 +1138,7 @@
             return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
     </script>
-        <!-- 🔒 PASSWORD PROTECTION -->
-    <script>
-        (function protectWebsite() {
-            const SECRET_PASSWORD = "Ayush@NEET2027";
-            
-            if (sessionStorage.getItem("website_unlocked") === "true") {
-                return;
-            }
-
-            document.body.style.display = "none";
-
-            let userInput = prompt("🔒 Restricted Access\nPlease enter the password to open @Ayush9845's NEET Planner:");
-
-            if (userInput === SECRET_PASSWORD) {
-                sessionStorage.setItem("website_unlocked", "true");
-                document.body.style.display = "block";
-            } else {
-                alert("❌ Incorrect Password! Access Denied.");
-                document.body.innerHTML = `
-                    <div style="height:100vh; display:flex; flex-direction:column; align-items:center; justify-content:center; background:#0f172a; color:white; font-family:sans-serif; text-align:center; padding:20px;">
-                        <h1 style="font-size:2rem; margin-bottom:10px;">🔒 Access Denied</h1>
-                        <p style="color:#94a3b8; margin-bottom:20px;">You entered an incorrect password.</p>
-                        <button onclick="location.reload()" style="background:#0d9488; color:white; border:none; padding:10px 20px; border-radius:10px; font-weight:bold; cursor:pointer;">Try Again</button>
-                    </div>
-                `;
-                document.body.style.display = "block";
-            }
-        })();
-    </script>
+  
 
 </body>
 </html>
