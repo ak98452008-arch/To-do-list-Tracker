@@ -20,11 +20,41 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-  /* 4 Custom Themes */
+  /* Complete Theme Engine Overrides */
+  /* 1. DARK THEME */
   body.theme-dark { background-color: #0f172a !important; color: #f8fafc !important; }
-  body.theme-light { background-color: #f8fafc !important; color: #0f172a !important; }
-  body.theme-neon { background-color: #0d0221 !important; color: #00f6ff !important; }
-  body.theme-emerald { background-color: #064e3b !important; color: #ecfdf5 !important; }
+  body.theme-dark header, body.theme-dark div[class*="bg-"], body.theme-dark select, body.theme-dark input {
+    background-color: #1e293b !important; color: #f8fafc !important; border-color: #334155 !important;
+  }
+
+  /* 2. LIGHT THEME */
+  body.theme-light { background-color: #f1f5f9 !important; color: #0f172a !important; }
+  body.theme-light header, body.theme-light div[class*="bg-"], body.theme-light select, body.theme-light input {
+    background-color: #ffffff !important; color: #0f172a !important; border-color: #e2e8f0 !important;
+  }
+  body.theme-light h1, body.theme-light h2, body.theme-light h3, body.theme-light p, body.theme-light span {
+    color: #0f172a !important;
+  }
+
+  /* 3. NEON THEME */
+  body.theme-neon { background-color: #0a051b !important; color: #00f6ff !important; }
+  body.theme-neon header, body.theme-neon div[class*="bg-"], body.theme-neon select, body.theme-neon input {
+    background-color: #12092e !important; color: #00f6ff !important; border-color: #ff007f !important;
+    box-shadow: 0 0 10px rgba(0, 246, 255, 0.15) !important;
+  }
+  body.theme-neon h1, body.theme-neon h2, body.theme-neon h3, body.theme-neon p, body.theme-neon span {
+    color: #00f6ff !important; text-shadow: 0 0 4px rgba(0,246,255,0.4);
+  }
+
+  /* 4. EMERALD THEME */
+  body.theme-emerald { background-color: #022c22 !important; color: #ecfdf5 !important; }
+  body.theme-emerald header, body.theme-emerald div[class*="bg-"], body.theme-emerald select, body.theme-emerald input {
+    background-color: #064e3b !important; color: #ecfdf5 !important; border-color: #047857 !important;
+  }
+  body.theme-emerald h1, body.theme-emerald h2, body.theme-emerald h3, body.theme-emerald p, body.theme-emerald span {
+    color: #a7f3d0 !important;
+  }
+
 </style>
 
     <script>
