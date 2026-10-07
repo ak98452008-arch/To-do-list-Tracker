@@ -286,15 +286,13 @@ const timer = setTimeout(hideSplash, 5000);
     <span id="cnt-secs" class="text-base font-extrabold text-teal-400 font-mono leading-none">00</span>
     <span class="text-[8px] font-bold tracking-wider text-slate-400 uppercase mt-0.5">Secs</span>
   </div>
-</div>
 
                 
                 <!-- Theme Toggle Button -->
-                <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
-                    <i id="themeIcon" class="fa-solid fa-moon"></i>
-                </button>
-            </div>
-        </div>
+        <button id="themeToggleBtn" onclick="toggleTheme()" class="relative z-20 p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+  <i id="themeIcon" class="fa-solid fa-moon"></i>
+</button>
+                    
     </header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -607,16 +605,21 @@ const timer = setTimeout(hideSplash, 5000);
         }
 
         function toggleTheme() {
-            if (document.documentElement.classList.contains('dark')) {
-                document.documentElement.classList.remove('dark');
-                localStorage.setItem('theme', 'light');
-                document.getElementById('themeIcon').className = 'fa-solid fa-moon';
-            } else {
-                document.documentElement.classList.add('dark');
-                localStorage.setItem('theme', 'dark');
-                document.getElementById('themeIcon').className = 'fa-solid fa-sun';
-            }
-        }
+  const html = document.documentElement;
+  const isDark = html.classList.contains('dark');
+  const icon = document.getElementById('themeIcon');
+
+  if (isDark) {
+    html.classList.remove('dark');
+    localStorage.setItem('theme', 'light');
+    if (icon) icon.className = 'fa-solid fa-moon';
+  } else {
+    html.classList.add('dark');
+    localStorage.setItem('theme', 'dark');
+    if (icon) icon.className = 'fa-solid fa-sun';
+  }
+}
+
 
         // Days to NEET Target Counter
 function setupCountdown() {
@@ -641,6 +644,9 @@ function setupCountdown() {
   updateTimer();
   setInterval(updateTimer, 1000);
 }
+
+setupCountdown();
+
 
 
   updateTimer();
