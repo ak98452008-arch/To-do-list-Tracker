@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEET Daily To-Do & AI Planner | @Ayush9845</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        medical: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .glass {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .dark .glass {
+            background: rgba(15, 23, 42, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen transition-colors duration-200">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-50 glass border-b border-slate-200 dark:border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-teal-600 to-emerald-400 flex items-center justify-center text-white shadow-md shadow-teal-500/20">
+                    <i class="fa-solid fa-user-md text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold bg-gradient-to-r from-teal-600 to-emerald-500 bg-clip-text text-transparent">NEET Daily Planner</h1>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">Created by <span class="text-teal-600 dark:text-teal-400 font-semibold">@Ayush9845</span></p>
+                </div>
+            </div>
+
+            <!-- Header Controls -->
+            <div class="flex items-center space-x-3">
+                <!-- Days to NEET Counter Badge -->
+                <div class="hidden sm:flex items-center space-x-2 bg-teal-50 dark:bg-teal-950/50 border border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-300 px-3 py-1.5 rounded-full text-xs font-semibold">
+                    <i class="fa-solid fa-calendar-check text-teal-500"></i>
+                    <span id="neetCountdown">Targeting NEET 2026</span>
+                </div>
+                <!-- Theme Toggle Button -->
+                <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
+                    <i id="themeIcon" class="fa-solid fa-moon"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Welcome Banner & Quick Stats -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+            <!-- Main Hero Card -->
+            <div class="lg:col-span-2 bg-gradient-to-br from-teal-600 via-teal-700 to-emerald-800 rounded-3xl p-6 text-white shadow-xl shadow-teal-900/10 relative overflow-hidden flex flex-col justify-between">
+                <div class="relative z-10">
+                    <div class="inline-flex items-center space-x-2 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-xs font-medium text-teal-100 mb-3 border border-white/20">
+                        <i class="fa-solid fa-bolt text-yellow-300"></i>
+                        <span>High-Yield NEET Focus Platform</span>
+                    </div>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Master Your Daily Target</h2>
+                    <p class="text-teal-100 text-sm mt-2 max-w-md">Consistent daily practice build doctors. Track tasks, study high-yield topics, and review smart suggestions by <span class="underline underline-offset-2 font-semibold">@Ayush9845</span>.</p>
+                </div>
+                <div class="mt-6 flex items-center space-x-4 relative z-10">
+                    <button onclick="scrollToTaskInput()" class="bg-white text-teal-800 hover:bg-teal-50 px-4 py-2.5 rounded-xl font-bold text-sm shadow-md transition flex items-center space-x-2">
+                        <i class="fa-solid fa-plus text-teal-600"></i>
+                        <span>Add New Target</span>
+                    </button>
+                    <button onclick="triggerAISuggestion()" class="bg-teal-500/30 hover:bg-teal-500/40 border border-white/20 text-white px-4 py-2.5 rounded-xl font-semibold text-sm transition flex items-center space-x-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-amber-300"></i>
+                        <span>Get AI Plan</span>
+                    </button>
+                </div>
+                <!-- Background Decorative Circles -->
+                <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-teal-500/20 rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute -top-10 -left-10 w-48 h-48 bg-emerald-500/20 rounded-full blur-2xl pointer-events-none"></div>
+            </div>
+
+            <!-- Daily Progress Card -->
+            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                <div>
+                    <div class="flex justify-between items-center mb-2">
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base">Overall Completion</h3>
+                        <span id="overallPercent" class="text-xs font-bold px-2.5 py-1 bg-teal-100 dark:bg-teal-950 text-teal-700 dark:text-teal-300 rounded-full">0%</span>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Complete all daily tasks to maintain your streak.</p>
+                    <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-3 overflow-hidden">
+                        <div id="overallProgressBar" class="bg-gradient-to-r from-teal-500 to-emerald-400 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-3 mt-4 pt-4 border-t border-slate-100 dark:border-slate-800/60">
+                    <div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-2xl">
+                        <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Completed</span>
+                        <div id="statCompletedCount" class="text-xl font-bold text-teal-600 dark:text-teal-400 mt-0.5">0</div>
+                    </div>
+                    <div class="bg-slate-50 dark:bg-slate-800/50 p-3 rounded-2xl">
+                        <span class="text-xs text-slate-500 dark:text-slate-400 font-medium">Pending Tasks</span>
+                        <div id="statPendingCount" class="text-xl font-bold text-slate-700 dark:text-slate-200 mt-0.5">0</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Subject-wise Task Breakdown -->
+            <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm flex flex-col justify-between">
+                <div>
+                    <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base mb-3">Subject Progress</h3>
+                    <div class="space-y-3">
+                        <!-- Biology -->
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-emerald-600 dark:text-emerald-400 flex items-center gap-1.5"><i class="fa-solid fa-leaf text-xs"></i> Biology</span>
+                                <span id="bioPercent" class="text-slate-500">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5">
+                                <div id="bioProgressBar" class="bg-emerald-500 h-1.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <!-- Physics -->
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-blue-600 dark:text-blue-400 flex items-center gap-1.5"><i class="fa-solid fa-atom text-xs"></i> Physics</span>
+                                <span id="phyPercent" class="text-slate-500">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5">
+                                <div id="phyProgressBar" class="bg-blue-500 h-1.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <!-- Chemistry -->
+                        <div>
+                            <div class="flex justify-between text-xs font-semibold mb-1">
+                                <span class="text-purple-600 dark:text-purple-400 flex items-center gap-1.5"><i class="fa-solid fa-flask text-xs"></i> Chemistry</span>
+                                <span id="chemPercent" class="text-slate-500">0%</span>
+                            </div>
+                            <div class="w-full bg-slate-100 dark:bg-slate-800 rounded-full h-1.5">
+                                <div id="chemProgressBar" class="bg-purple-500 h-1.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-3 border-t border-slate-100 dark:border-slate-800/60 text-center">
+                    <span class="text-xs text-slate-400 dark:text-slate-500 font-medium"><i class="fa-solid fa-circle-check text-emerald-500 mr-1"></i> Target 100% daily</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area: Left To-Do List, Right AI Suggestions & Timer -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Left Column: To-Do Input & List (2 Columns wide) -->
+            <div class="lg:col-span-2 space-y-6">
+                
+                <!-- Task Input Box -->
+                <div id="taskInputSection" class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm">
+                    <h3 class="text-base font-bold text-slate-800 dark:text-slate-100 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-plus-circle text-teal-600 dark:text-teal-400"></i> Add Daily NEET Task
+                    </h3>
+                    
+                    <form id="taskForm" onsubmit="handleAddTask(event)" class="space-y-4">
+                        <div>
+                            <input type="text" id="taskInput" required placeholder="e.g. Solve 50 MCQs of Genetics / Revise Organic Chemistry Mechanisms..." class="w-full px-4 py-3 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500 text-sm font-medium transition">
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                            <!-- Subject Selector -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">Subject</label>
+                                <select id="subjectSelect" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                    <option value="Biology">🌿 Biology</option>
+                                    <option value="Physics">⚡ Physics</option>
+                                    <option value="Chemistry">🧪 Chemistry</option>
+                                    <option value="Revision">🔄 Revision / Mock Test</option>
+                                </select>
+                            </div>
+
+                            <!-- Priority Selector -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">Priority</label>
+                                <select id="prioritySelect" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-teal-500">
+                                    <option value="High">🔴 High Priority</option>
+                                    <option value="Medium" selected>🟡 Medium Priority</option>
+                                    <option value="Low">🟢 Low Priority</option>
+                                </select>
+                            </div>
+
+                            <!-- Estimated Time -->
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-500 dark:text-slate-400 mb-1">Est. Duration</label>
+                                <input type="number" id="timeInput" min="15" max="300" step="15" value="45" class="w-full px-3 py-2.5 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 text-xs font-semibold focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Minutes">
+                            </div>
+                        </div>
+
+                        <div class="pt-2 flex justify-end">
+                            <button type="submit" class="w-full sm:w-auto bg-teal-600 hover:bg-teal-700 text-white font-bold px-6 py-2.5 rounded-xl text-sm shadow-md transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i>
+                                <span>Save Task</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Filters and Task List Container -->
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm space-y-4">
+                    
+                    <!-- Filters & Header -->
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-slate-100 dark:border-slate-800">
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-base flex items-center gap-2">
+                            <i class="fa-solid fa-list-check text-teal-600"></i> Today's Schedule
+                        </h3>
+                        
+                        <!-- Filter Tabs -->
+                        <div class="flex flex-wrap items-center gap-1.5 text-xs">
+                            <button onclick="setFilter('all')" id="filter-all" class="filter-btn px-3 py-1.5 rounded-lg font-semibold bg-teal-600 text-white">All</button>
+                            <button onclick="setFilter('Biology')" id="filter-Biology" class="filter-btn px-3 py-1.5 rounded-lg font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Biology</button>
+                            <button onclick="setFilter('Physics')" id="filter-Physics" class="filter-btn px-3 py-1.5 rounded-lg font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Physics</button>
+                            <button onclick="setFilter('Chemistry')" id="filter-Chemistry" class="filter-btn px-3 py-1.5 rounded-lg font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">Chemistry</button>
+                        </div>
+                    </div>
+
+                    <!-- Task List Items -->
+                    <div id="taskList" class="space-y-3 min-h-[160px] max-h-[500px] overflow-y-auto pr-1 custom-scrollbar">
+                        <!-- Dynamic Tasks rendered here -->
+                    </div>
+
+                    <!-- Clear Completed Action -->
+                    <div class="pt-2 flex justify-between items-center text-xs text-slate-500">
+                        <span id="taskCounterText">0 tasks remaining</span>
+                        <button onclick="clearCompletedTasks()" class="text-slate-400 hover:text-red-500 transition font-medium">Clear Completed Tasks</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Column: Focus Pomodoro & AI Suggestions Engine -->
+            <div class="space-y-6">
+                
+                <!-- Focus Pomodoro Timer Card -->
+                <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 border border-slate-200 dark:border-slate-800 shadow-sm text-center">
+                    <div class="flex items-center justify-between mb-3">
+                        <h3 class="font-bold text-slate-800 dark:text-slate-100 text-sm flex items-center gap-2">
+                            <i class="fa-solid fa-stopwatch text-amber-500"></i> NEET Focus Timer
+                        </h3>
+                        <span id="timerModeBadge" class="text-[10px] font-bold px-2 py-0.5 bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 rounded-md uppercase">25 Min Study</span>
+                    </div>
+
+                    <div class="my-4">
+                        <div id="timerDisplay" class="text-4xl font-black tracking-tight text-slate-800 dark:text-slate-100 font-mono">25:00</div>
+                    </div>
+
+                    <div class="flex justify-center items-center space-x-2">
+                        <button id="startTimerBtn" onclick="toggleTimer()" class="bg-amber-500 hover:bg-amber-600 text-white font-bold px-5 py-2 rounded-xl text-xs shadow-md transition flex items-center gap-1.5">
+                            <i id="timerBtnIcon" class="fa-solid fa-play"></i> <span id="timerBtnText">Start</span>
+                        </button>
+                        <button onclick="resetTimer()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 font-bold px-3 py-2 rounded-xl text-xs transition">
+                            <i class="fa-solid fa-rotate-right"></i>
+                        </button>
+                        <button onclick="switchTimerMode()" class="bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 font-bold px-3 py-2 rounded-xl text-xs transition">
+                            <i class="fa-solid fa-mug-hot"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI Suggestions & High Yield Topics -->
+                <div class="bg-gradient-to-br from-slate-900 to-slate-800 text-white rounded-3xl p-6 shadow-xl relative overflow-hidden">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center gap-2">
+                            <div class="w-7 h-7 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center">
+                                <i class="fa-solid fa-wand-magic-sparkles text-xs"></i>
+                            </div>
+                            <h3 class="font-bold text-sm">Ayush's NEET AI Suggestions</h3>
+                        </div>
+                        <span class="text-[10px] bg-teal-500/30 text-teal-300 px-2 py-0.5 rounded-full font-semibold">High Yield</span>
+                    </div>
+
+                    <p class="text-xs text-slate-300 mb-4 leading-relaxed">
+                        Click below to generate smart, personalized study suggestions based on current syllabus trends and your pending tasks.
+                    </p>
+
+                    <button onclick="generateAITips()" class="w-full bg-gradient-to-r from-teal-500 to-emerald-500 hover:from-teal-600 hover:to-emerald-600 text-white text-xs font-bold py-2.5 px-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 mb-4">
+                        <i class="fa-solid fa-lightbulb text-yellow-300"></i>
+                        <span>Generate Study Suggestions</span>
+                    </button>
+
+                    <!-- Suggestions Display Box -->
+                    <div id="aiSuggestionsBox" class="bg-slate-800/80 border border-slate-700/60 rounded-2xl p-4 text-xs space-y-2.5 max-h-[220px] overflow-y-auto custom-scrollbar">
+                        <div class="text-slate-400 italic text-center py-2">
+                            "Success in NEET comes from revising NCERT daily and solving at least 100 MCQs."
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Owner Branding Footer Badge -->
+                <div class="text-center pt-2">
+                    <p class="text-xs text-slate-400 dark:text-slate-500 font-medium">
+                        Designed & Maintained by <a href="https://github.com" target="_blank" class="text-teal-600 dark:text-teal-400 font-bold hover:underline">@Ayush9845</a>
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- App Logic Script -->
+    <script>
+        // Data State
+        let tasks = JSON.parse(localStorage.getItem('ayush_neet_tasks')) || [];
+        let currentFilter = 'all';
+        let timerInterval = null;
+        let timerSeconds = 25 * 60;
+        let isTimerRunning = false;
+        let isBreakMode = false;
+
+        // High Yield NEET Data Suggestions Pool
+        const highYieldPool = {
+            Biology: [
+                "Focus on Genetics & Evolution: NCERT line-by-line is mandatory for molecular basis of inheritance.",
+                "Human Physiology: Master chemical coordination and nervous system diagrams.",
+                "Plant Physiology: Revise Calvin cycle, C4 pathway, and light reaction steps."
+            ],
+            Physics: [
+                "Modern Physics & Semiconductors: Solve past 10-year MCQs. Highest scoring ratio!",
+                "Current Electricity: Practice Kirchhoff's Laws and potentiometer numerical problems.",
+                "Ray Optics: Direct formula application questions appear frequently."
+            ],
+            Chemistry: [
+                "Organic Reactions: Revise Name Reactions (Reimer-Tiemann, Cannizzaro, Aldol).",
+                "Chemical Bonding & Periodic Table: VSEPR theory and hybridization exceptions.",
+                "Physical Chemistry: Focus on Electrochemistry & Chemical Kinetics formulas."
+            ],
+            General: [
+                "Rule of 3: Read NCERT -> Solve 50 MCQs -> Analyze Mistakes.",
+                "Take a 5-minute break after every 45 minutes of intense focus.",
+                "Prepare a mistake notebook for physics formulas and organic reagents!"
+            ]
+        };
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            renderTasks();
+            updateStats();
+            setupCountdown();
+        });
+
+        // Theme Handling
+        function initTheme() {
+            if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+                document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('themeIcon').className = 'fa-solid fa-moon';
+            }
+        }
+
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                document.getElementById('themeIcon').className = 'fa-solid fa-moon';
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                document.getElementById('themeIcon').className = 'fa-solid fa-sun';
+            }
+        }
+
+        // Days to NEET Target Counter
+        function setupCountdown() {
+            const currentYear = new Date().getFullYear();
+            const targetDate = new Date(`May 3, ${currentYear + (new Date().getMonth() > 4 ? 1 : 0)}`);
+            const today = new Date();
+            const diffDays = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
+            document.getElementById('neetCountdown').innerText = `NEET Exam in ~${diffDays > 0 ? diffDays : 200} Days`;
+        }
+
+        // Scroll helper
+        function scrollToTaskInput() {
+            document.getElementById('taskInputSection').scrollIntoView({ behavior: 'smooth' });
+            document.getElementById('taskInput').focus();
+        }
+
+        // Add Task Handler
+        function handleAddTask(e) {
+            e.preventDefault();
+            const input = document.getElementById('taskInput');
+            const subject = document.getElementById('subjectSelect').value;
+            const priority = document.getElementById('prioritySelect').value;
+            const duration = document.getElementById('timeInput').value;
+
+            if (!input.value.trim()) return;
+
+            const newTask = {
+                id: Date.now(),
+                text: input.value.trim(),
+                subject: subject,
+                priority: priority,
+                duration: duration || 45,
+                completed: false,
+                createdAt: new Date().toLocaleDateString()
+            };
+
+            tasks.unshift(newTask);
+            saveAndRender();
+            input.value = '';
+        }
+
+        // Save & Render All Data
+        function saveAndRender() {
+            localStorage.setItem('ayush_neet_tasks', JSON.stringify(tasks));
+            renderTasks();
+            updateStats();
+        }
+
+        // Render Tasks to DOM
+        function renderTasks() {
+            const listContainer = document.getElementById('taskList');
+            let filteredTasks = tasks;
+
+            if (currentFilter !== 'all') {
+                filteredTasks = tasks.filter(t => t.subject === currentFilter);
+            }
+
+            if (filteredTasks.length === 0) {
+                listContainer.innerHTML = `
+                    <div class="text-center py-10 border-2 border-dashed border-slate-200 dark:border-slate-800 rounded-2xl">
+                        <i class="fa-solid fa-notes-medical text-3xl text-slate-300 dark:text-slate-700 mb-2"></i>
+                        <p class="text-sm font-semibold text-slate-500 dark:text-slate-400">No tasks found for this category</p>
+                        <p class="text-xs text-slate-400 mt-1">Add a new target above to get started!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            listContainer.innerHTML = filteredTasks.map(task => {
+                const priorityColors = {
+                    'High': 'bg-red-100 text-red-700 dark:bg-red-950/60 dark:text-red-300 border-red-200 dark:border-red-900',
+                    'Medium': 'bg-amber-100 text-amber-700 dark:bg-amber-950/60 dark:text-amber-300 border-amber-200 dark:border-amber-900',
+                    'Low': 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/60 dark:text-emerald-300 border-emerald-200 dark:border-emerald-900'
+                };
+
+                const subjectBadges = {
+                    'Biology': '🌿 Bio',
+                    'Physics': '⚡ Phy',
+                    'Chemistry': '🧪 Chem',
+                    'Revision': '🔄 Rev'
+                };
+
+                return `
+                    <div class="flex items-center justify-between p-3.5 rounded-2xl border ${task.completed ? 'bg-slate-50 dark:bg-slate-900/40 border-slate-200 dark:border-slate-800 opacity-60' : 'bg-white dark:bg-slate-800/80 border-slate-200 dark:border-slate-700'} shadow-sm transition hover:border-teal-400">
+                        <div class="flex items-center space-x-3 flex-1 min-w-0 mr-2">
+                            <button onclick="toggleTaskCompletion(${task.id})" class="w-5 h-5 rounded-md border flex items-center justify-center transition ${task.completed ? 'bg-teal-600 border-teal-600 text-white' : 'border-slate-300 dark:border-slate-600 text-transparent hover:border-teal-500'}">
+                                <i class="fa-solid fa-check text-xs"></i>
+                            </button>
+                            <div class="flex-1 min-w-0">
+                                <p class="text-xs sm:text-sm font-semibold ${task.completed ? 'line-through text-slate-400 dark:text-slate-500' : 'text-slate-800 dark:text-slate-100'} truncate">
+                                    ${escapeHtml(task.text)}
+                                </p>
+                                <div class="flex items-center space-x-2 mt-1">
+                                    <span class="text-[10px] font-bold px-2 py-0.5 rounded-md border ${priorityColors[task.priority]}">
+                                        ${task.priority}
+                                    </span>
+                                    <span class="text-[10px] font-medium text-slate-500 dark:text-slate-400 bg-slate-100 dark:bg-slate-800 px-2 py-0.5 rounded-md">
+                                        ${subjectBadges[task.subject] || task.subject}
+                                    </span>
+                                    <span class="text-[10px] text-slate-400 flex items-center gap-1">
+                                        <i class="fa-regular fa-clock"></i> ${task.duration}m
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button onclick="deleteTask(${task.id})" class="text-slate-400 hover:text-red-500 p-1.5 rounded-lg hover:bg-red-50 dark:hover:bg-red-950/30 transition">
+                            <i class="fa-regular fa-trash-can text-xs"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Toggle Task Complete State
+        function toggleTaskCompletion(id) {
+            tasks = tasks.map(t => t.id === id ? { ...t, completed: !t.completed } : t);
+            saveAndRender();
+        }
+
+        // Delete Task
+        function deleteTask(id) {
+            tasks = tasks.filter(t => t.id !== id);
+            saveAndRender();
+        }
+
+        // Clear Completed Tasks
+        function clearCompletedTasks() {
+            tasks = tasks.filter(t => !t.completed);
+            saveAndRender();
+        }
+
+        // Filter Setting
+        function setFilter(subject) {
+            currentFilter = subject;
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.className = 'filter-btn px-3 py-1.5 rounded-lg font-semibold bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300';
+            });
+            const activeBtn = document.getElementById(`filter-${subject}`);
+            if (activeBtn) {
+                activeBtn.className = 'filter-btn px-3 py-1.5 rounded-lg font-semibold bg-teal-600 text-white';
+            }
+            renderTasks();
+        }
+
+        // Update Statistics & Progress Bars
+        function updateStats() {
+            const total = tasks.length;
+            const completed = tasks.filter(t => t.completed).length;
+            const pending = total - completed;
+
+            const percent = total === 0 ? 0 : Math.round((completed / total) * 100);
+
+            document.getElementById('overallPercent').innerText = `${percent}%`;
+            document.getElementById('overallProgressBar').style.width = `${percent}%`;
+            document.getElementById('statCompletedCount').innerText = completed;
+            document.getElementById('statPendingCount').innerText = pending;
+            document.getElementById('taskCounterText').innerText = `${pending} pending target${pending === 1 ? '' : 's'}`;
+
+            // Helper to calc subject percentages
+            const updateSubjectProgress = (subject, barId, textId) => {
+                const subTasks = tasks.filter(t => t.subject === subject);
+                const subDone = subTasks.filter(t => t.completed).length;
+                const subPercent = subTasks.length === 0 ? 0 : Math.round((subDone / subTasks.length) * 100);
+                document.getElementById(barId).style.width = `${subPercent}%`;
+                document.getElementById(textId).innerText = `${subPercent}%`;
+            };
+
+            updateSubjectProgress('Biology', 'bioProgressBar', 'bioPercent');
+            updateSubjectProgress('Physics', 'phyProgressBar', 'phyPercent');
+            updateSubjectProgress('Chemistry', 'chemProgressBar', 'chemPercent');
+        }
+
+        // AI Suggestions Logic
+        function generateAITips() {
+            const container = document.getElementById('aiSuggestionsBox');
+            container.innerHTML = '<div class="text-center py-2 text-teal-300 font-medium">Generating smart strategy...</div>';
+
+            setTimeout(() => {
+                const pendingBiology = tasks.filter(t => !t.completed && t.subject === 'Biology').length;
+                const pendingPhysics = tasks.filter(t => !t.completed && t.subject === 'Physics').length;
+                const pendingChemistry = tasks.filter(t => !t.completed && t.subject === 'Chemistry').length;
+
+                let suggestions = [];
+
+                if (pendingPhysics > pendingBiology && pendingPhysics > pendingChemistry) {
+                    suggestions.push("⚠️ <b>Physics Focus:</b> You have extra pending Physics tasks. Practice numericals line-by-line first!");
+                } else if (pendingBiology > 0) {
+                    suggestions.push("🌿 <b>Biology Tip:</b> Read NCERT diagrams and bold terms thoroughly.");
+                }
+
+                // Pick random tips from High Yield Pool
+                suggestions.push(`💡 ${highYieldPool.Biology[Math.floor(Math.random() * highYieldPool.Biology.length)]}`);
+                suggestions.push(`⚡ ${highYieldPool.Physics[Math.floor(Math.random() * highYieldPool.Physics.length)]}`);
+                suggestions.push(`🧪 ${highYieldPool.Chemistry[Math.floor(Math.random() * highYieldPool.Chemistry.length)]}`);
+
+                container.innerHTML = suggestions.map(tip => `
+                    <div class="p-2 bg-slate-800/90 rounded-xl border border-slate-700/80 text-slate-200">
+                        ${tip}
+                    </div>
+                `).join('');
+            }, 400);
+        }
+
+        function triggerAISuggestion() {
+            generateAITips();
+            document.getElementById('aiSuggestionsBox').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Pomodoro Focus Timer Logic
+        function toggleTimer() {
+            if (isTimerRunning) {
+                clearInterval(timerInterval);
+                isTimerRunning = false;
+                document.getElementById('timerBtnText').innerText = 'Start';
+                document.getElementById('timerBtnIcon').className = 'fa-solid fa-play';
+            } else {
+                isTimerRunning = true;
+                document.getElementById('timerBtnText').innerText = 'Pause';
+                document.getElementById('timerBtnIcon').className = 'fa-solid fa-pause';
+                
+                timerInterval = setInterval(() => {
+                    if (timerSeconds > 0) {
+                        timerSeconds--;
+                        updateTimerDisplay();
+                    } else {
+                        clearInterval(timerInterval);
+                        isTimerRunning = false;
+                        alert(isBreakMode ? "Break time over! Back to NEET preparation." : "Focus session complete! Take a 5 minute break.");
+                        switchTimerMode();
+                    }
+                }, 1000);
+            }
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isTimerRunning = false;
+            timerSeconds = isBreakMode ? 5 * 60 : 25 * 60;
+            document.getElementById('timerBtnText').innerText = 'Start';
+            document.getElementById('timerBtnIcon').className = 'fa-solid fa-play';
+            updateTimerDisplay();
+        }
+
+        function switchTimerMode() {
+            isBreakMode = !isBreakMode;
+            document.getElementById('timerModeBadge').innerText = isBreakMode ? '5 Min Break' : '25 Min Study';
+            document.getElementById('timerModeBadge').className = isBreakMode ? 
+                'text-[10px] font-bold px-2 py-0.5 bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 rounded-md uppercase' : 
+                'text-[10px] font-bold px-2 py-0.5 bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 rounded-md uppercase';
+            resetTimer();
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timerSeconds / 60);
+            const secs = timerSeconds % 60;
+            document.getElementById('timerDisplay').innerText = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Utility: Escape HTML
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+</html>
