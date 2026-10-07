@@ -601,13 +601,29 @@ const timer = setTimeout(hideSplash, 5000);
         }
 
         // Days to NEET Target Counter
-        function setupCountdown() {
-            const currentYear = new Date().getFullYear();
-            const targetDate = new Date(`May 3, ${currentYear + (new Date().getMonth() > 4 ? 1 : 0)}`);
-            const today = new Date();
-            const diffDays = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
-            document.getElementById('neetCountdown').innerText = `NEET Exam in ~${diffDays > 0 ? diffDays : 200} Days`;
-        }
+function setupCountdown() {
+  function updateTimer() {
+    const targetDate = new Date('May 2, 2027 00:00:00').getTime();
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    if (diff > 0) {
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('neetCountdown').innerText = `NEET 2027: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+    } else {
+      document.getElementById('neetCountdown').innerText = "NEET 2027 Exam Day!";
+    }
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000); // Har 1 second me real-time change hoga
+}
+
+
 
         // Scroll helper
         function scrollToTaskInput() {
