@@ -154,6 +154,55 @@
     });
   })();
 </script>
+<script>
+  // Credentials Setup
+  const ADMIN_KEY = "AyushKumar9845";
+  const USER_PASSWORD = "Ayush@NEET2027";
+
+  // 1. Check if Owner is already bypassed
+  function isOwnerBypassed() {
+    return localStorage.getItem('owner_bypass_active') === 'true';
+  }
+
+  // 2. Unlock App Screen
+  function unlockApp() {
+    const loginScreen = document.getElementById('login-screen');
+    const appContent = document.getElementById('app-content');
+    
+    if (loginScreen) loginScreen.style.display = 'none';
+    if (appContent) appContent.style.display = 'block';
+  }
+
+  // 3. Password Verification Logic
+  function checkCredentials() {
+    const inputField = document.getElementById('password-input');
+    const enteredValue = inputField ? inputField.value.trim() : '';
+
+    // Admin Key entered
+    if (enteredValue === ADMIN_KEY) {
+      localStorage.setItem('owner_bypass_active', 'true');
+      alert("Admin Access Activated! Is device par ab password nahi maange ga.");
+      unlockApp();
+      return;
+    }
+
+    // Normal User Password entered
+    if (enteredValue === USER_PASSWORD) {
+      unlockApp();
+      return;
+    }
+
+    // Wrong Key or Password
+    alert("Access Denied: Galat Password ya Key!");
+  }
+
+  // 4. Auto Bypass on Page Load
+  document.addEventListener('DOMContentLoaded', () => {
+    if (isOwnerBypassed()) {
+      unlockApp();
+    }
+  });
+</script>
 
     <!-- Header Navigation -->
     <header class="sticky top-0 z-50 glass border-b border-slate-200 dark:border-slate-800">
