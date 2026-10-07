@@ -68,34 +68,66 @@
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen transition-colors duration-200">
-   <!-- Premium Modern Splash Screen -->
-<div id="splash-screen" style="position: fixed; inset: 0; background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%); display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 99999; transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.6s;">
+ <!-- Cyber Security Gateway Splash Screen -->
+<div id="splash-screen" style="position: fixed; inset: 0; background: #080c14; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 99999; font-family: system-ui, -apple-system, sans-serif; transition: opacity 0.6s ease, visibility 0.6s;">
   
-  <!-- Glass Card Container -->
-  <div style="background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255, 255, 255, 0.1); padding: 40px 32px; border-radius: 24px; box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); text-align: center; max-width: 340px; width: 85%;">
+  <!-- Outer Glow Box -->
+  <div style="background: rgba(15, 23, 42, 0.75); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 20px; padding: 28px; width: 90%; max-width: 420px; box-shadow: 0 0 50px rgba(56, 189, 248, 0.15); color: #f8fafc;">
     
-    <!-- AIIMS Badge Icon -->
-    <div style="width: 56px; height: 56px; background: linear-gradient(135deg, #38bdf8, #6366f1); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px auto; box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);">
-      <svg style="width: 28px; height: 28px; fill: white;" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    <!-- Top Header Bar -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1.5px; color: #64748b;">
+      <span style="display: flex; align-items: center; gap: 6px;">
+        <span style="width: 6px; height: 6px; background: #10b981; border-radius: 50%; box-shadow: 0 0 8px #10b981;"></span>
+        GATEWAY VERIFIED
+      </span>
+      <span>AIIMS PORTAL</span>
     </div>
 
-    <!-- Title with Gradient -->
-    <h1 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 6px; background: linear-gradient(90deg, #ffffff, #cbd5e1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: 0.5px;">NEET 2027 Tracker</h1>
-    
-    <!-- Tagline & Creator -->
-    <p style="font-size: 0.9rem; color: #38bdf8; font-weight: 600; margin-bottom: 2px; letter-spacing: 0.5px;">@Ayush9845</p>
-    <p style="font-size: 0.8rem; color: #94a3b8; font-weight: 500; margin-bottom: 28px; text-transform: uppercase; letter-spacing: 1px;">Target • AIIMS New Delhi</p>
-    
-    <!-- Animated Progress Bar -->
-    <div style="width: 100%; height: 4px; background: rgba(255, 255, 255, 0.1); border-radius: 10px; overflow: hidden; position: relative;">
-      <div style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; background: linear-gradient(90deg, #38bdf8, #818cf8); animation: loadBar 1.5s ease-in-out forwards; transform-origin: left;"></div>
+    <!-- Profile Bar -->
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 44px; height: 44px; background: linear-gradient(135deg, #0284c7, #6366f1); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 1.2rem; box-shadow: 0 4px 12px rgba(2, 132, 199, 0.3);">
+          N
+        </div>
+        <div>
+          <h2 style="font-size: 1rem; font-weight: 700; margin: 0; color: #f8fafc;">NEET 2027 Tracker</h2>
+          <p style="font-size: 0.75rem; color: #38bdf8; margin: 2px 0 0 0; font-weight: 600;">@Ayush9845</p>
+        </div>
+      </div>
+      <div style="width: 36px; height: 36px; background: rgba(56, 189, 248, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #38bdf8;">
+        <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+      </div>
+    </div>
+
+    <!-- Status & Progress Percentage -->
+    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px; color: #94a3b8; margin-bottom: 8px;">
+      <span>AWAITING ACCESS</span>
+      <span style="color: #38bdf8;">100%</span>
+    </div>
+
+    <!-- Progress Line -->
+    <div style="width: 100%; height: 5px; background: rgba(255, 255, 255, 0.08); border-radius: 10px; overflow: hidden; margin-bottom: 24px;">
+      <div style="height: 100%; width: 100%; background: linear-gradient(90deg, #38bdf8, #818cf8); animation: gatewayLoad 1.2s ease-in-out forwards; transform-origin: left;"></div>
+    </div>
+
+    <!-- Main Message Box -->
+    <div style="background: rgba(2, 6, 23, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 12px; padding: 16px; margin-bottom: 20px;">
+      <h3 style="font-size: 1.1rem; font-weight: 700; margin: 0 0 6px 0; color: #ffffff;">Targeting AIIMS New Delhi</h3>
+      <p style="font-size: 0.8rem; color: #64748b; margin: 0; line-height: 1.4;">Initializing secure environment and loading daily study goals...</p>
+    </div>
+
+    <!-- Bottom Info Footer -->
+    <div style="display: flex; justify-content: space-between; font-size: 0.7rem; color: #64748b; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 14px;">
+      <span>• ENCRYPTED</span>
+      <span>• ACTIVE SESSION</span>
+      <span>• TARGET 2027</span>
     </div>
 
   </div>
 </div>
 
 <style>
-  @keyframes loadBar {
+  @keyframes gatewayLoad {
     0% { transform: scaleX(0); }
     100% { transform: scaleX(1); }
   }
@@ -109,12 +141,8 @@
         splash.style.opacity = '0';
         splash.style.visibility = 'hidden';
       }
-    }, 1600);
-  });
-</script>
-
-
-
+    },
+               </script>⁠
     <!-- Header Navigation -->
     <header class="sticky top-0 z-50 glass border-b border-slate-200 dark:border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -132,7 +160,7 @@
             <div class="flex items-center space-x-3">
                 <!-- Days to NEET Counter Badge -->
                 <div class="hidden sm:flex items-center space-x-2 bg-teal-50 dark:bg-teal-950/50 border border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-300 px-3 py-1.5 rounded-full text-xs font-semibold">
-                    <i class="fa-solid fa-calendar-check text-teal-500"></i>
+                    <i class="fa-solid fa-calendar-check text-teal-500"></i> )
                     <span id="neetCountdown">Targeting NEET 2026</span>
                 </div>
                 <!-- Theme Toggle Button -->
