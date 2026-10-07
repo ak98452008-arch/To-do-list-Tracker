@@ -266,10 +266,28 @@ const timer = setTimeout(hideSplash, 5000);
             <!-- Header Controls -->
             <div class="flex items-center space-x-3">
                 <!-- Days to NEET Counter Badge -->
-                <div class="hidden sm:flex items-center space-x-2 bg-teal-50 dark:bg-teal-950/50 border border-teal-200 dark:border-teal-800 text-teal-700 dark:text-teal-300 px-3 py-1.5 rounded-full text-xs font-semibold">
-                    <i class="fa-solid fa-calendar-check text-teal-500"></i> )
-                    <span id="neetCountdown">Targeting NEET 2026</span>
-                </div>
+                <div class="flex items-center space-x-1.5 bg-slate-900/90 border border-teal-500/30 p-1.5 rounded-xl shadow-lg">
+  <div class="flex flex-col items-center px-2 py-1 bg-slate-800 rounded-lg border border-slate-700 min-w-[42px]">
+    <span id="cnt-days" class="text-base font-extrabold text-teal-400 font-mono leading-none">00</span>
+    <span class="text-[8px] font-bold tracking-wider text-slate-400 uppercase mt-0.5">Days</span>
+  </div>
+  <span class="text-teal-400 font-bold text-sm font-mono animate-pulse">:</span>
+  <div class="flex flex-col items-center px-2 py-1 bg-slate-800 rounded-lg border border-slate-700 min-w-[42px]">
+    <span id="cnt-hours" class="text-base font-extrabold text-teal-400 font-mono leading-none">00</span>
+    <span class="text-[8px] font-bold tracking-wider text-slate-400 uppercase mt-0.5">Hours</span>
+  </div>
+  <span class="text-teal-400 font-bold text-sm font-mono animate-pulse">:</span>
+  <div class="flex flex-col items-center px-2 py-1 bg-slate-800 rounded-lg border border-slate-700 min-w-[42px]">
+    <span id="cnt-mins" class="text-base font-extrabold text-teal-400 font-mono leading-none">00</span>
+    <span class="text-[8px] font-bold tracking-wider text-slate-400 uppercase mt-0.5">Mins</span>
+  </div>
+  <span class="text-teal-400 font-bold text-sm font-mono animate-pulse">:</span>
+  <div class="flex flex-col items-center px-2 py-1 bg-slate-800 rounded-lg border border-slate-700 min-w-[42px]">
+    <span id="cnt-secs" class="text-base font-extrabold text-teal-400 font-mono leading-none">00</span>
+    <span class="text-[8px] font-bold tracking-wider text-slate-400 uppercase mt-0.5">Secs</span>
+  </div>
+</div>
+
                 
                 <!-- Theme Toggle Button -->
                 <button id="themeToggleBtn" onclick="toggleTheme()" class="p-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition">
@@ -613,11 +631,17 @@ function setupCountdown() {
       const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
       const seconds = Math.floor((diff % (1000 * 60)) / 1000);
 
-      document.getElementById('neetCountdown').innerText = `NEET 2027: ${days}d ${hours}h ${minutes}m ${seconds}s`;
-    } else {
-      document.getElementById('neetCountdown').innerText = "NEET 2027 Exam Day!";
+      document.getElementById('cnt-days').innerText = String(days).padStart(2, '0');
+      document.getElementById('cnt-hours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('cnt-mins').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('cnt-secs').innerText = String(seconds).padStart(2, '0');
     }
   }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+}
+
 
   updateTimer();
   setInterval(updateTimer, 1000); // Har 1 second me real-time change hoga
