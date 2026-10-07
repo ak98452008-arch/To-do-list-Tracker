@@ -134,24 +134,25 @@
 </style>
 
 ⁠<script>
-  function hideSplash() {
-    const splash = document.getElementById('splash-screen');
-    if (splash && splash.style.opacity !== '0') {
-      splash.style.opacity = '0';
-      splash.style.visibility = 'hidden';
-      setTimeout(() => splash.remove(), 600);
+  (function() {
+    function hideSplash() {
+      const splash = document.getElementById('splash-screen');
+      if (splash) {
+        splash.style.opacity = '0';
+        splash.style.visibility = 'hidden';
+        setTimeout(() => splash.remove(), 600);
+      }
     }
-  }
 
-  // Force hide after 50.0 seconds maximum
-  setTimeout(hideSplash, 50000);
+    // Exact 50 Seconds Timer
+    const timer = setTimeout(hideSplash, 50000);
 
-  // Hide immediately if already loaded
-  if (document.readyState === 'complete') {
-    setTimeout(hideSplash, 50000);
-  } else {
-    window.addEventListener('load', () => setTimeout(hideSplash, 50000));
-  }
+    // Tap to skip anytime
+    document.addEventListener('click', () => {
+      clearTimeout(timer);
+      hideSplash();
+    });
+  })();
 </script>
 
     <!-- Header Navigation -->
