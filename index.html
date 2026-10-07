@@ -624,7 +624,9 @@ const timer = setTimeout(hideSplash, 5000);
         // Days to NEET Target Counter
 function setupCountdown() {
   function updateTimer() {
-    const targetDate = new Date('May 2, 2027 00:00:00').getTime();
+        // May 2, 2027 00:00:00 ka exact timestamp
+    const targetDate = new Date('2027-05-02T00:00:00').getTime();
+
     const now = new Date().getTime();
     const diff = targetDate - now;
 
