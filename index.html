@@ -27,14 +27,18 @@
     background-color: #1e293b !important; color: #f8fafc !important; border-color: #334155 !important;
   }
 
-  /* 2. LIGHT THEME */
-  body.theme-light { background-color: #f1f5f9 !important; color: #0f172a !important; }
+    /* 2. LIGHT THEME (High Contrast & Visible Buttons) */
+  body.theme-light { background-color: #f8fafc !important; color: #0f172a !important; }
   body.theme-light header, body.theme-light div[class*="bg-"], body.theme-light select, body.theme-light input {
-    background-color: #ffffff !important; color: #0f172a !important; border-color: #e2e8f0 !important;
+    background-color: #ffffff !important; color: #0f172a !important; border-color: #cbd5e1 !important;
   }
-  body.theme-light h1, body.theme-light h2, body.theme-light h3, body.theme-light p, body.theme-light span {
+  body.theme-light h1, body.theme-light h2, body.theme-light h3, body.theme-light p, body.theme-light span, body.theme-light label {
     color: #0f172a !important;
   }
+  body.theme-light button, body.theme-light .btn {
+    background-color: #0284c7 !important; color: #ffffff !important; border: none !important;
+  }
+
 
   /* 3. NEON THEME */
   body.theme-neon { background-color: #0a051b !important; color: #00f6ff !important; }
@@ -54,9 +58,34 @@
   body.theme-emerald h1, body.theme-emerald h2, body.theme-emerald h3, body.theme-emerald p, body.theme-emerald span {
     color: #a7f3d0 !important;
   }
+  /* 5. CYBERPUNK THEME (Neon Yellow & Pink) */
+  body.theme-cyberpunk { background-color: #120024 !important; color: #fcee0a !important; }
+  body.theme-cyberpunk header, body.theme-cyberpunk div[class*="bg-"], body.theme-cyberpunk select, body.theme-cyberpunk input {
+    background-color: #1a0033 !important; color: #00ff9f !important; border-color: #ff0055 !important;
+    box-shadow: 0 0 8px rgba(255, 0, 85, 0.3) !important;
+  }
+  body.theme-cyberpunk h1, body.theme-cyberpunk h2, body.theme-cyberpunk h3, body.theme-cyberpunk p, body.theme-cyberpunk span {
+    color: #fcee0a !important; text-shadow: 0 0 3px rgba(252, 238, 10, 0.5);
+  }
+  body.theme-cyberpunk button {
+    background-color: #ff0055 !important; color: #ffffff !important; font-weight: bold !important;
+  }
 
+
+  /* Splash Screen Permanent White Theme Override */
+  #splash-screen, 
+  #splash-screen * {
+    color: #ffffff !important;
+  }
+  
+  #splash-screen h2, 
+  #splash-screen p, 
+  #splash-screen span, 
+  #splash-screen div {
+    color: #ffffff !important;
+    opacity: 1 !important;
+  }
 </style>
-
     <script>
         tailwind.config = {
             darkMode: 'class',
