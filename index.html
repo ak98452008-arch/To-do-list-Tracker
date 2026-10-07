@@ -133,16 +133,27 @@
   }
 </style>
 
-<script>
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const splash = document.getElementById('splash-screen');
-      if (splash) {
-        splash.style.opacity = '0';
-        splash.style.visibility = 'hidden';
-      }
-    },
-               </script>⁠
+⁠<script>
+  function hideSplash() {
+    const splash = document.getElementById('splash-screen');
+    if (splash && splash.style.opacity !== '0') {
+      splash.style.opacity = '0';
+      splash.style.visibility = 'hidden';
+      setTimeout(() => splash.remove(), 600);
+    }
+  }
+
+  // Force hide after 1.5 seconds maximum
+  setTimeout(hideSplash, 1500);
+
+  // Hide immediately if already loaded
+  if (document.readyState === 'complete') {
+    setTimeout(hideSplash, 1000);
+  } else {
+    window.addEventListener('load', () => setTimeout(hideSplash, 1000));
+  }
+</script>
+
     <!-- Header Navigation -->
     <header class="sticky top-0 z-50 glass border-b border-slate-200 dark:border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
