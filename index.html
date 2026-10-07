@@ -65,6 +65,90 @@
         .dark .custom-scrollbar::-webkit-scrollbar-thumb {
             background: #334155;
         }
+
+        /* Modern NEET 2027 Countdown */
+        .neet-countdown-card {
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0f172a 0%, #134e4a 52%, #0f766e 100%);
+            border: 1px solid rgba(45, 212, 191, 0.22);
+            border-radius: 2rem;
+            padding: 1.5rem;
+            color: white;
+            box-shadow: 0 20px 45px rgba(15, 118, 110, 0.16);
+        }
+        .dark .neet-countdown-card {
+            background: linear-gradient(135deg, #020617 0%, #0f2927 52%, #0f4c47 100%);
+            border-color: rgba(45, 212, 191, 0.18);
+        }
+        .neet-countdown-card::before,
+        .neet-countdown-card::after {
+            content: "";
+            position: absolute;
+            border-radius: 999px;
+            pointer-events: none;
+            filter: blur(2px);
+        }
+        .neet-countdown-card::before {
+            width: 190px; height: 190px; right: -70px; top: -90px;
+            background: rgba(45, 212, 191, 0.13);
+        }
+        .neet-countdown-card::after {
+            width: 150px; height: 150px; left: -75px; bottom: -95px;
+            background: rgba(16, 185, 129, 0.10);
+        }
+        .countdown-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: .75rem;
+        }
+        .countdown-unit {
+            min-width: 0;
+            text-align: center;
+            padding: 1rem .55rem .85rem;
+            border-radius: 1.25rem;
+            background: rgba(255,255,255,.075);
+            border: 1px solid rgba(255,255,255,.10);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .countdown-number {
+            font-variant-numeric: tabular-nums;
+            font-size: clamp(1.75rem, 4.5vw, 3rem);
+            line-height: 1;
+            font-weight: 800;
+            letter-spacing: -.055em;
+            text-shadow: 0 2px 18px rgba(0,0,0,.18);
+        }
+        .countdown-label {
+            margin-top: .55rem;
+            font-size: .64rem;
+            line-height: 1;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: rgba(226,232,240,.72);
+        }
+        .countdown-target {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            margin-top: 1rem;
+            color: rgba(226,232,240,.78);
+            font-size: .72rem;
+            font-weight: 600;
+        }
+        @media (max-width: 640px) {
+            .countdown-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); gap: .4rem; }
+            .countdown-unit { padding: .8rem .25rem .7rem; border-radius: 1rem; }
+            .countdown-number { font-size: clamp(1.25rem, 7vw, 2rem); }
+            .countdown-label { font-size: .48rem; letter-spacing: .06em; }
+            .neet-countdown-card { padding: 1.15rem; border-radius: 1.5rem; }
+        }
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen transition-colors duration-200">
@@ -279,6 +363,52 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- NEET 2027 Live Countdown -->
+        <section class="neet-countdown-card mb-8" aria-labelledby="countdownTitle">
+            <div class="relative z-10 flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-5">
+                <div>
+                    <div class="inline-flex items-center gap-2 text-[10px] sm:text-xs font-bold tracking-[0.16em] uppercase text-teal-200 mb-2">
+                        <span class="w-2 h-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,.8)]"></span>
+                        Live Countdown
+                    </div>
+                    <h2 id="countdownTitle" class="text-xl sm:text-2xl font-extrabold tracking-tight">NEET 2027 Countdown</h2>
+                    <p class="text-xs sm:text-sm text-slate-300/80 mt-1">Every second counts. Keep moving towards your target.</p>
+                </div>
+                <div class="text-xs font-semibold text-teal-100/80 bg-white/5 border border-white/10 rounded-full px-3 py-1.5 self-start sm:self-auto">
+                    <i class="fa-regular fa-calendar mr-1.5"></i> 02 May 2027
+                </div>
+            </div>
+
+            <div class="countdown-grid" role="timer" aria-live="polite" aria-atomic="true">
+                <div class="countdown-unit">
+                    <div id="countdownMonths" class="countdown-number">00</div>
+                    <div class="countdown-label">Months</div>
+                </div>
+                <div class="countdown-unit">
+                    <div id="countdownDays" class="countdown-number">00</div>
+                    <div class="countdown-label">Days</div>
+                </div>
+                <div class="countdown-unit">
+                    <div id="countdownHours" class="countdown-number">00</div>
+                    <div class="countdown-label">Hours</div>
+                </div>
+                <div class="countdown-unit">
+                    <div id="countdownMinutes" class="countdown-number">00</div>
+                    <div class="countdown-label">Minutes</div>
+                </div>
+                <div class="countdown-unit">
+                    <div id="countdownSeconds" class="countdown-number">00</div>
+                    <div class="countdown-label">Seconds</div>
+                </div>
+            </div>
+
+            <div class="countdown-target">
+                <i class="fa-solid fa-bullseye text-teal-300"></i>
+                <span id="countdownStatus">Target: 2 May 2027 • 12:00 AM</span>
+            </div>
+        </section>
 
         <!-- Main Content Area: Left To-Do List, Right AI Suggestions & Timer -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -503,13 +633,74 @@
             }
         }
 
-        // Days to NEET Target Counter
+        // Live NEET 2027 Countdown — target: 2 May 2027, 12:00 AM (local time)
+        let neetCountdownInterval = null;
+
         function setupCountdown() {
-            const currentYear = new Date().getFullYear();
-            const targetDate = new Date(`May 3, ${currentYear + (new Date().getMonth() > 4 ? 1 : 0)}`);
-            const today = new Date();
-            const diffDays = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
-            document.getElementById('neetCountdown').innerText = `NEET Exam in ~${diffDays > 0 ? diffDays : 200} Days`;
+            const targetDate = new Date(2027, 4, 2, 0, 0, 0, 0); // May = 4
+            const pad = value => String(value).padStart(2, '0');
+
+            function getCalendarCountdown(now, target) {
+                if (now >= target) {
+                    return { months: 0, days: 0, hours: 0, minutes: 0, seconds: 0, expired: true };
+                }
+
+                // First calculate complete calendar months, then the remaining exact time.
+                let cursor = new Date(now);
+                let months = (target.getFullYear() - cursor.getFullYear()) * 12 +
+                             (target.getMonth() - cursor.getMonth());
+
+                const afterMonths = new Date(cursor);
+                afterMonths.setMonth(afterMonths.getMonth() + months);
+
+                if (afterMonths > target) {
+                    months--;
+                    afterMonths.setMonth(afterMonths.getMonth() - 1);
+                }
+
+                let remainingMs = target - afterMonths;
+                const dayMs = 24 * 60 * 60 * 1000;
+                const hourMs = 60 * 60 * 1000;
+                const minuteMs = 60 * 1000;
+                const secondMs = 1000;
+
+                const days = Math.floor(remainingMs / dayMs);
+                remainingMs -= days * dayMs;
+                const hours = Math.floor(remainingMs / hourMs);
+                remainingMs -= hours * hourMs;
+                const minutes = Math.floor(remainingMs / minuteMs);
+                remainingMs -= minutes * minuteMs;
+                const seconds = Math.floor(remainingMs / secondMs);
+
+                return { months, days, hours, minutes, seconds, expired: false };
+            }
+
+            function updateCountdown() {
+                const now = new Date();
+                const result = getCalendarCountdown(now, targetDate);
+
+                document.getElementById('countdownMonths').textContent = pad(result.months);
+                document.getElementById('countdownDays').textContent = pad(result.days);
+                document.getElementById('countdownHours').textContent = pad(result.hours);
+                document.getElementById('countdownMinutes').textContent = pad(result.minutes);
+                document.getElementById('countdownSeconds').textContent = pad(result.seconds);
+
+                const headerBadge = document.getElementById('neetCountdown');
+                const status = document.getElementById('countdownStatus');
+
+                if (result.expired) {
+                    headerBadge.textContent = 'NEET 2027 Target Reached';
+                    status.textContent = 'Target date: 2 May 2027 • Countdown complete';
+                    clearInterval(neetCountdownInterval);
+                } else {
+                    headerBadge.textContent = `NEET 2027 • ${result.months}M ${result.days}D`;
+                    status.textContent = 'Target: 2 May 2027 • 12:00 AM';
+                }
+            }
+
+            updateCountdown();
+            clearInterval(neetCountdownInterval);
+            neetCountdownInterval = setInterval(updateCountdown, 1000);
         }
 
         // Scroll helper
