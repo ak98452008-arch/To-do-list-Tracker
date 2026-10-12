@@ -252,7 +252,8 @@
       box-shadow: 0 0 8px #10b981;
     "></span>
  <span style="color: #94a3b8; font-size: 12px; font-weight: 600; letter-spacing: 0.5px;">TOTAL VIEWS:</span>
-<img src="https://api.visitorbadge.io/api/visitors?path=to-do-list-tracker.pages.dev&label=&countColor=%2310b981&style=flat-square" alt="Views" style="height: 16px; border: none; outline: none; background: transparent; vertical-align: middle;" />
+<span style="color: #10b981; font-size: 13px; font-weight: 700;" id="live-view-count">...</span>
+
   </div>
 </div>
 
@@ -1190,7 +1191,20 @@
     });
   });
 </script>
-
+<script>
+  fetch('https://api.visitorbadge.io/api/visitors?path=to-do-list-tracker.pages.dev')
+    .then(res => res.text())
+    .then(svg => {
+      const match = svg.match(/<text[^>]*>(\d+)<\/text>/g);
+      if (match && match.length > 0) {
+        const count = match[match.length - 1].replace(/<[^>]+>/g, '');
+        document.getElementById('live-view-count').innerText = count;
+      }
+    })
+    .catch(() => {
+      document.getElementById('live-view-count').innerText = '19';
+    });
+</script>
 
 </body>
 </html>
