@@ -19,6 +19,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- AOS CSS & Custom Animations -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<style>
+  .glass-card { transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
+  .glass-card:hover { transform: translateY(-6px) scale(1.01); box-shadow: 0 20px 30px -10px rgba(16, 185, 129, 0.15); border-color: rgba(16, 185, 129, 0.3); }
+</style>
+
     <script>
         tailwind.config = {
             darkMode: 'class',
@@ -222,37 +229,43 @@
     </style>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen transition-colors duration-200">
-      <!-- Modern Visitor Badge -->
+     <!-- High-End Detailed Analytics Widget -->
 <div style="display: flex; justify-content: center; margin: 20px 0;">
   <div style="
     display: inline-flex; 
     align-items: center; 
-    gap: 10px; 
-    background: rgba(15, 23, 42, 0.6); 
-    backdrop-filter: blur(8px); 
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    padding: 6px 14px; 
-    border-radius: 9999px; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    gap: 16px; 
+    background: rgba(15, 23, 42, 0.75); 
+    backdrop-filter: blur(12px); 
+    border: 1px solid rgba(255, 255, 255, 0.12); 
+    padding: 8px 18px; 
+    border-radius: 16px; 
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+    font-family: system-ui, -apple-system, sans-serif;
   ">
-    <span style="
-      width: 8px; 
-      height: 8px; 
-      background-color: #10b981; 
-      border-radius: 50%; 
-      display: inline-block;
-      box-shadow: 0 0 8px #10b981;
-    "></span>
-    <span style="
-      color: #94a3b8; 
-      font-size: 12px; 
-      font-weight: 600; 
-      letter-spacing: 0.5px;
-      text-transform: uppercase;
-    ">Live Traffic</span>
-    <img src="https://api.visitorbadge.io/api/combined?path=to-do-list-tracker.pages.dev&countColor=%232563eb" alt="Visitors" style="height: 20px; border-radius: 4px;" />
+    <!-- Live Pulse Indicator -->
+    <div style="display: flex; align-items: center; gap: 6px;">
+      <span style="
+        width: 8px; 
+        height: 8px; 
+        background-color: #10b981; 
+        border-radius: 50%; 
+        display: inline-block;
+        box-shadow: 0 0 10px #10b981;
+      "></span>
+      <span style="color: #34d399; font-size: 11px; font-weight: 700; letter-spacing: 0.8px;">LIVE</span>
+    </div>
+
+    <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.15);"></div>
+
+    <!-- Detailed Count Badge -->
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <span style="color: #94a3b8; font-size: 12px; font-weight: 500;">Page Views:</span>
+      <img src="https://api.visitorbadge.io/api/visitors?path=to-do-list-tracker.pages.dev&label=&countColor=%2310b981&style=flat-square" alt="Views" style="height: 18px; border-radius: 4px;" />
+    </div>
   </div>
 </div>
+
 
 
 
@@ -1177,6 +1190,18 @@
     💬 Send Your Valuable Suggestions To The Creator
   </a>
 </div>
+<!-- AOS Library JS & Init -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    AOS.init({
+      duration: 800,
+      easing: 'ease-out-cubic',
+      once: true,
+      offset: 40
+    });
+  });
+</script>
 
 
 </body>
